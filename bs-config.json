@@ -1,0 +1,7 @@
+{
+  "port": 1337,
+  "server": {
+    "baseDir": "./",
+    "index": "index.html"
+  }
+}
