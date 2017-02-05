@@ -74,38 +74,44 @@
     <script type="text/javascript">
     var textFile = null,
     makeTextFile = function (text) {
-      var data = new Blob([text], {type: 'text/markdown'});
+        var data = new Blob([text], {type: 'text/markdown'});
 
-      // If we are replacing a previously generated file we need to
-      // manually revoke the object URL to avoid memory leaks.
-      if (textFile !== null) {
+        // If we are replacing a previously generated file we need to
+        // manually revoke the object URL to avoid memory leaks.
+        if (textFile !== null) {
         window.URL.revokeObjectURL(textFile);
-      }
+        }
 
-      textFile = window.URL.createObjectURL(data);
+        textFile = window.URL.createObjectURL(data);
 
-      return textFile;
-    };
-    var create = document.getElementById('create'),
+        return textFile;
+    },
+    create = document.getElementById('create'),
     textbox = document.getElementById('sourceMd');
 
-    document.addEventListener("keydown", function(e) {
-      if (e.keyCode == 83 && (navigator.platform.match("Mac") ? e.metaKey : e.ctrlKey)) {
+    document.addEventListener('keydown', function(e) {
+        if (e.keyCode == 83 && (navigator.platform.match('Mac') ? e.metaKey : e.ctrlKey)) {
         e.preventDefault();
+        var nm = window.prompt('save file as (notepad.md)?');
+        nm = nm||'notepad.md';
+        if( !nm.indexOf('.md') > -1 ){
+            nm += '.md';
+        }
         var link = document.getElementById('downloadlink');
+        link.setAttribute('download', nm);
         link.href = makeTextFile(textbox.value);
         link.click();
-      }
+        }
     }, false);
     marked.setOptions({
-      renderer: new marked.Renderer(),
-      gfm: true,
-      tables: true,
-      breaks: false,
-      pedantic: false,
-      sanitize: true,
-      smartLists: true,
-      smartypants: false
+        renderer: new marked.Renderer(),
+        gfm: true,
+        tables: true,
+        breaks: false,
+        pedantic: false,
+        sanitize: true,
+        smartLists: true,
+        smartypants: false
     });
     var vm = new Vue({
       el: '#editor',
