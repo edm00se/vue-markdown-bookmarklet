@@ -1,3 +1,9 @@
+# Repo Archived
+
+Chrome's new tab policy prevents JS from running, so this has been broken for some time. I have archived this repo, but the project lives on complete with the other features, in a codesandbox project.
+
+https://codesandbox.io/embed/vue-markdown-applet-326bw?view=preview
+
 # About
 
 This is a [vue.js](https://vuejs.org/) SPA, mostly just a hasty extension of the [vue.js example](https://vuejs.org/examples/) markdown editor.
